@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Callista — FAQ</title>
+<meta name="description" content="Questions about Callista: what it covers, how access works, what it does with your queries.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <a class="wordmark" href="./">Callista</a>
+    <nav>
+      <a href="./">Overview</a>
+      <a href="install.html">Install</a>
+      <a href="faq.html" aria-current="page">FAQ</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <h1>Questions</h1>
+  <p class="lede">If yours is not here, <a href="contact.html">ask</a>.</p>
+
+  <h2>The library</h2>
+
+  <details open>
+    <summary>What exactly does Callista cover?</summary>
+    <p>The WIFU <em>Bibliothek</em> — 459 publications across 515 language editions:
+      Praxisleitfäden, Praxisartikel, WIFU_kompakt, Studien, the WIFU-Schriftenreihe and
+      books, published between 2007 and 2026. Callista holds the full text of each, split
+      into 8,685 sections, plus 1,313 figures.</p>
+  </details>
+
+  <details>
+    <summary>Is it up to date?</summary>
+    <p>The corpus is refreshed from wifu.de periodically rather than continuously. A
+      publication that appeared this week may not be in yet. The figures on the overview
+      page carry the date they were counted.</p>
+  </details>
+
+  <details>
+    <summary>Most of it is in German. I don’t read German.</summary>
+    <p>That is much of the point. Claude reads the German for you: ask in English, and it
+      will search the German material and answer in English, quoting and translating as it
+      goes. Callista indexes German text with German stemming and English text with
+      English stemming, so neither language is searched approximately.</p>
+    <p>What you lose is nuance in translation. For anything you intend to cite, follow the
+      link and read the original.</p>
+  </details>
+
+  <details>
+    <summary>Can I get the PDFs?</summary>
+    <p>Not through Callista. It returns the text, the metadata and a link to the
+      publication’s page on wifu.de, where WIFU distributes the PDF on their own terms.</p>
+  </details>
+
+  <details>
+    <summary>Why do some publications have richer summaries than others?</summary>
+    <p>Because a semantic enrichment pass — abstracts, keywords, topic classification,
+      figure descriptions — is still running across the corpus. Where it has landed you
+      get a fuller summary; where it has not, you get the publisher’s own excerpt, which is
+      a perfectly good answer. Search works across everything either way. Coverage of the
+      enrichment layer is currently low and growing.</p>
+  </details>
+
+  <details>
+    <summary>A work appears once but has two editions. Why?</summary>
+    <p>A German original and its English translation are two editions of one work. Results
+      are grouped at the level of the <em>work</em>, with its editions listed underneath,
+      so a bilingual publication does not take two slots in your results just for existing
+      twice.</p>
+  </details>
+
+  <h2>Access</h2>
+
+  <details>
+    <summary>Who can use it?</summary>
+    <p>People who have been invited. There is no domain rule and no self-service sign-up —
+      access is granted one email address at a time, by hand.</p>
+  </details>
+
+  <details>
+    <summary>I was invited but it says I am not on the list.</summary>
+    <p>Almost always the address. Access is tied to the exact address the invitation went
+      to; a personal address, an alias, or a different institutional address will be turned
+      away. <a href="contact.html">Tell us which address you would prefer</a> and we can
+      move it.</p>
+  </details>
+
+  <details>
+    <summary>Can I share my access?</summary>
+    <p>Please don’t. Sign-in is tied to your mailbox, and usage is attributed to you.
+      If a colleague needs access, <a href="contact.html">ask for them</a> — it takes a
+      moment.</p>
+  </details>
+
+  <details>
+    <summary>How do I stop using it?</summary>
+    <p>Remove the connector in Claude’s settings, and tell us if you would like the grant
+      withdrawn as well. Withdrawal takes effect on the next request, not whenever a token
+      happens to expire.</p>
+  </details>
+
+  <h2>Privacy and limits</h2>
+
+  <details>
+    <summary>What do you log?</summary>
+    <p>Which tool was called, the query text, how many results came back, how long it took,
+      and which account made the call. Nothing from your wider conversation with Claude
+      reaches Callista — it only ever sees the search or lookup Claude sends it.</p>
+    <p>The queries that return nothing are read as a to-do list: they show what people
+      expect the library to answer and it currently does not.</p>
+  </details>
+
+  <details>
+    <summary>Is there a rate limit?</summary>
+    <p>Forty tool calls an hour per account. It is a ceiling against runaway loops, not a
+      quota — ordinary use will not reach it. Failed calls are not counted against you.</p>
+  </details>
+
+  <details>
+    <summary>Can Callista write anything, or change the library?</summary>
+    <p>No. It has read-only access to the corpus and no ability to modify it.</p>
+  </details>
+
+  <h2>Provenance</h2>
+
+  <details>
+    <summary>Is this a WIFU product?</summary>
+    <p>No. The publications are WIFU’s and remain theirs. Callista is operated by CeFEO at
+      Jönköping International Business School as a way of reading that literature inside
+      Claude. Anything Callista returns should be attributed to the WIFU publication it
+      came from, not to Callista.</p>
+  </details>
+
+  <details>
+    <summary>Can I cite Callista?</summary>
+    <p>Cite the underlying publication. Callista gives you the title, authors, year and a
+      link precisely so that you can. If you want to describe how you found the material,
+      naming the tool in a methods note is fine.</p>
+  </details>
+
+  <details>
+    <summary>Claude summarised something incorrectly.</summary>
+    <p>It can. Callista returns source text faithfully, but the summary on top of it is
+      generated. For anything consequential, open the linked publication and check.
+      <a href="contact.html">Report</a> anything that looks systematically wrong — that is
+      usually a retrieval problem worth fixing.</p>
+  </details>
+
+</main>
+
+<footer class="wrap">
+  <p><strong style="color:var(--tert)">Callista</strong> is operated by CeFEO at Jönköping
+    International Business School. The publications it serves are the work of the
+    <a href="https://www.wifu.de/" rel="noopener">WIFU-Stiftung</a>.</p>
+</footer>
+
+</body>
+</html>

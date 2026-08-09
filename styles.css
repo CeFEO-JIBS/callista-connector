@@ -1,0 +1,227 @@
+/* Callista — callista.familybusiness.se
+ *
+ * Palette lifted from WIFU's own theme (bergauf). Note the contrast constraint:
+ * #309ABE on white is ~3.1:1, which is fine for large headings, fills and rules but
+ * NOT for body copy. Body text is always --navy or near-black. Do not "brighten" it.
+ */
+
+:root {
+  --navy:  #22416C;   /* primary — all body copy */
+  --cyan:  #309ABE;   /* accent — rules, fills, large headings only */
+  --tert:  #3C6D9D;   /* secondary text */
+  --grey:  #ECECEC;   /* borders, panels */
+  --mid:   #9B9B9B;   /* muted text */
+  --ink:   #16202E;   /* near-black for long-form reading */
+  --bg:    #ffffff;
+  --panel: #F7F9FB;
+}
+
+/* Self-hosted, per the brand spec — no third-party font CDN, so no external request
+ * and nothing to consent to. The .woff2 files belong in ./fonts/. Until they land the
+ * stacks below fall back cleanly, so the site is never blocked on the asset drop. */
+@font-face {
+  font-family: 'Roboto Condensed';
+  src: url('./fonts/roboto-condensed-700.woff2') format('woff2');
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('./fonts/roboto-400.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('./fonts/roboto-500.woff2') format('woff2');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: 'Roboto', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--bg);
+}
+
+.wrap { max-width: 46rem; margin: 0 auto; padding: 0 1.5rem; }
+
+/* ---------------------------------------------------------------- header */
+header {
+  border-bottom: 1px solid var(--grey);
+  background: var(--bg);
+}
+.bar {
+  display: flex; align-items: center; gap: 1.5rem;
+  padding: 1.1rem 0;
+  max-width: 46rem; margin: 0 auto; padding-left: 1.5rem; padding-right: 1.5rem;
+}
+
+/* The wordmark. NOTE: this is typographic on purpose — logo.svg and mark.svg are being
+ * finalised separately. When they arrive, replace the .wordmark span with:
+ *   <img src="logo.svg" alt="Callista" height="28">
+ * The WIFU logo deliberately does NOT appear here: callista.familybusiness.se is a
+ * CeFEO-operated domain, and a WIFU mark in the header would read as "published by WIFU". */
+.wordmark {
+  font-family: 'Roboto Condensed', 'Arial Narrow', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: .01em;
+  color: var(--navy);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.wordmark::before {
+  content: ""; display: inline-block;
+  width: .55rem; height: .55rem; border-radius: 50%;
+  background: var(--cyan); margin-right: .5rem; vertical-align: .05em;
+}
+
+nav { margin-left: auto; display: flex; gap: 1.25rem; flex-wrap: wrap; }
+nav a {
+  color: var(--tert); text-decoration: none; font-size: .95rem; font-weight: 500;
+  padding-bottom: 2px; border-bottom: 2px solid transparent;
+}
+nav a:hover { color: var(--navy); }
+nav a[aria-current="page"] { color: var(--navy); border-bottom-color: var(--cyan); }
+
+/* ------------------------------------------------------------------ type */
+h1, h2, h3 {
+  font-family: 'Roboto Condensed', 'Arial Narrow', system-ui, sans-serif;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.2;
+  letter-spacing: -.005em;
+}
+h1 { font-size: 2.3rem; margin: 2.5rem 0 .5rem; }
+h2 { font-size: 1.45rem; margin: 2.75rem 0 .6rem; }
+h3 { font-size: 1.1rem; margin: 1.75rem 0 .4rem; font-family: 'Roboto', system-ui, sans-serif; font-weight: 500; }
+
+.lede { font-size: 1.15rem; color: var(--tert); margin: 0 0 2rem; }
+
+p { margin: 0 0 1.1rem; }
+a { color: var(--navy); text-decoration-color: var(--cyan); text-underline-offset: 2px; }
+a:hover { color: var(--cyan); }
+
+ul, ol { margin: 0 0 1.1rem; padding-left: 1.3rem; }
+li { margin-bottom: .45rem; }
+
+hr { border: 0; border-top: 2px solid var(--cyan); margin: 2.5rem 0; }
+
+code, .mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: .9em;
+  background: var(--panel);
+  border: 1px solid var(--grey);
+  border-radius: 5px;
+  padding: .1rem .35rem;
+  word-break: break-all;
+}
+
+/* --------------------------------------------------------------- panels */
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--grey);
+  border-radius: 12px;
+  padding: 1.25rem 1.4rem;
+  margin: 0 0 1.4rem;
+}
+.panel.accent { border-left: 4px solid var(--cyan); }
+.panel h3 { margin-top: 0; }
+.panel :last-child { margin-bottom: 0; }
+
+/* URL to copy on the install page */
+.endpoint {
+  display: block;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 1rem;
+  background: var(--navy);
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  padding: .9rem 1.1rem;
+  margin: 0 0 1.4rem;
+  word-break: break-all;
+}
+
+/* numbered steps */
+ol.steps { list-style: none; padding: 0; counter-reset: s; }
+ol.steps > li {
+  counter-increment: s;
+  position: relative;
+  padding-left: 2.6rem;
+  margin-bottom: 1.5rem;
+}
+ol.steps > li::before {
+  content: counter(s);
+  position: absolute; left: 0; top: .05rem;
+  width: 1.8rem; height: 1.8rem;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--cyan); color: #fff;
+  font-family: 'Roboto Condensed', system-ui, sans-serif;
+  font-weight: 700; font-size: .95rem;
+}
+
+/* stat row */
+.stats { display: flex; flex-wrap: wrap; gap: 1.75rem; margin: 0 0 1.5rem; }
+.stat b {
+  display: block;
+  font-family: 'Roboto Condensed', 'Arial Narrow', system-ui, sans-serif;
+  font-weight: 700; font-size: 2rem; line-height: 1.1; color: var(--navy);
+}
+.stat span { color: var(--tert); font-size: .9rem; }
+
+/* FAQ */
+details {
+  border-bottom: 1px solid var(--grey);
+  padding: 1rem 0;
+}
+details summary {
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--navy);
+  list-style: none;
+  display: flex; gap: .6rem; align-items: flex-start;
+}
+details summary::-webkit-details-marker { display: none; }
+details summary::before {
+  content: "+"; color: var(--cyan); font-weight: 700; line-height: 1.5;
+}
+details[open] summary::before { content: "–"; }
+details > *:not(summary) { margin-top: .8rem; }
+
+/* --------------------------------------------------------------- footer */
+footer {
+  margin-top: 4rem;
+  border-top: 1px solid var(--grey);
+  padding: 2rem 0 3rem;
+  color: var(--mid);
+  font-size: .9rem;
+}
+footer a { color: var(--tert); }
+
+/* --------------------------------------------------------------- mobile */
+@media (max-width: 34rem) {
+  body { font-size: 16px; }
+  h1 { font-size: 1.85rem; }
+  h2 { font-size: 1.25rem; }
+  .bar { flex-wrap: wrap; gap: .75rem 1rem; }
+  nav { margin-left: 0; width: 100%; gap: 1rem; }
+  .stats { gap: 1.1rem 1.75rem; }
+}
+
+/* Respect the reader's theme where it costs nothing, but keep the palette:
+ * this is a brand surface, so dark mode inverts the shell, not the accents. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #10161F; --panel: #182231; --grey: #2A3646;
+    --ink: #E4EAF1; --navy: #8FB6D8; --tert: #9FB6CC; --mid: #7C8B9C;
+  }
+  .endpoint { background: #1B2942; }
+  ol.steps > li::before { color: #0E141C; }
+}

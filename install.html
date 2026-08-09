@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Install Callista</title>
+<meta name="description" content="Connect Callista, the WIFU library connector, to Claude in about a minute.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <a class="wordmark" href="./">Callista</a>
+    <nav>
+      <a href="./">Overview</a>
+      <a href="install.html" aria-current="page">Install</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <h1>Install Callista</h1>
+  <p class="lede">About a minute, once. You need a Claude account and an invitation to
+    Callista at the email address you will sign in with.</p>
+
+  <div class="panel accent">
+    <h3>Before you start</h3>
+    <p>Custom connectors are available on Claude <strong>Pro</strong>, <strong>Max</strong>,
+      <strong>Team</strong> and <strong>Enterprise</strong>. On Team and Enterprise a
+      workspace admin may need to allow it first.</p>
+  </div>
+
+  <h2>The connector URL</h2>
+  <p>You will be asked for this. Copy it exactly:</p>
+  <span class="endpoint">https://mcp.familybusiness.se/callista</span>
+
+  <h2>Steps</h2>
+  <ol class="steps">
+    <li>
+      <strong>Open Claude in a browser</strong> at
+      <a href="https://claude.ai" rel="noopener">claude.ai</a> and sign in.
+      <p style="margin:.4rem 0 0;color:var(--tert);font-size:.95rem">Connectors are added
+        from the web app. Once added they work in the desktop and mobile apps too.</p>
+    </li>
+    <li>
+      <strong>Go to Settings → Connectors</strong>, then choose
+      <strong>Add custom connector</strong> at the bottom of the list.
+    </li>
+    <li>
+      <strong>Paste the URL</strong> above. Name it <em>Callista</em> if you are asked for
+      a name. Confirm.
+    </li>
+    <li>
+      <strong>Sign in with your email.</strong> A window opens asking for your address.
+      Use the address your invitation was sent to — access is granted per address, so a
+      different one will be turned away even if it is yours.
+    </li>
+    <li>
+      <strong>Enter the six-digit code.</strong> It arrives by email within a few seconds
+      and expires after a few minutes.
+      <p style="margin:.4rem 0 0;color:var(--tert);font-size:.95rem">The code is sent from
+        <span class="mono">noreply@fbdashboard.org</span>, the shared sending address for
+        these connectors. That is expected — it is not phishing.</p>
+    </li>
+    <li>
+      <strong>Done.</strong> Callista appears in your connector list. Start a new chat and
+      ask it something.
+    </li>
+  </ol>
+
+  <hr>
+
+  <h2>Check it works</h2>
+  <p>In a new chat, ask:</p>
+  <div class="panel">
+    <p style="margin:0"><em>“Using Callista, what does the WIFU library say about
+      Beiräte in family firms? Give me the three most relevant publications.”</em></p>
+  </div>
+  <p>You should get titles, years and links to wifu.de. If Claude says it has no such tool,
+    the connector is not enabled for that chat — check the connector toggle in the chat’s
+    tools menu.</p>
+
+  <h2>If something goes wrong</h2>
+  <ul>
+    <li><strong>“Not on the list.”</strong> The address you entered has not been granted
+      access. Try the exact address your invitation went to, or
+      <a href="contact.html">ask us</a>.</li>
+    <li><strong>No email.</strong> Check spam for
+      <span class="mono">noreply@fbdashboard.org</span>. Codes expire after a few minutes —
+      start again from Claude to get a fresh one.</li>
+    <li><strong>“Too many attempts.”</strong> Five wrong codes ends that sign-in attempt.
+      Start again from Claude.</li>
+    <li><strong>It worked and then stopped.</strong> Access is re-checked on every request,
+      so a withdrawn or expired grant takes effect immediately. If that is unexpected,
+      <a href="contact.html">tell us</a>.</li>
+  </ul>
+
+</main>
+
+<footer class="wrap">
+  <p><strong style="color:var(--tert)">Callista</strong> is operated by CeFEO at Jönköping
+    International Business School. The publications it serves are the work of the
+    <a href="https://www.wifu.de/" rel="noopener">WIFU-Stiftung</a>.</p>
+</footer>
+
+</body>
+</html>
