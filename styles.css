@@ -1,24 +1,34 @@
 /* Callista — callista.familybusiness.se
  *
- * Palette lifted from WIFU's own theme (bergauf). Note the contrast constraint:
- * #309ABE on white is ~3.1:1, which is fine for large headings, fills and rules but
- * NOT for body copy. Body text is always --navy or near-black. Do not "brighten" it.
+ * DARK BY DESIGN, and matched to the connector's own surfaces (src/theme.ts in
+ * CeFEO-JIBS/wifu-mcp-connector). A reader crosses between the two mid-install — this
+ * page, then mcp.familybusiness.se/callista to sign in — so they have to look like one
+ * product.
+ *
+ * The lockup is the reason. It is chrome artwork on a transparent background: on white
+ * it has almost no edge contrast and reads as a grey smudge, and the mark's own field is
+ * near-black.
+ *
+ * The contrast constraint from the brand notes inverts here, usefully. #309ABE is only
+ * ~3.1:1 on white — fine for rules and fills, barred from body copy. On this ground it
+ * clears 7:1, so it can carry text as well.
  */
 
 :root {
-  --navy:  #22416C;   /* primary — all body copy */
-  --cyan:  #309ABE;   /* accent — rules, fills, large headings only */
-  --tert:  #3C6D9D;   /* secondary text */
-  --grey:  #ECECEC;   /* borders, panels */
-  --mid:   #9B9B9B;   /* muted text */
-  --ink:   #16202E;   /* near-black for long-form reading */
-  --bg:    #ffffff;
-  --panel: #F7F9FB;
+  --ground: #0D1520;  /* page */
+  --panel:  #16212F;  /* cards */
+  --raised: #1D2A3A;  /* code, table stripes */
+  --line:   #27384E;  /* borders */
+  --text:   #E7EDF5;  /* body copy */
+  --muted:  #93A6BC;  /* secondary */
+  --cyan:   #309ABE;  /* WIFU accent */
+  --lift:   #4FB8DA;  /* links, hover */
+  --navy:   #22416C;  /* WIFU primary, as a deep fill */
 }
 
-/* Self-hosted, per the brand spec — no third-party font CDN, so no external request
- * and nothing to consent to. The .woff2 files belong in ./fonts/. Until they land the
- * stacks below fall back cleanly, so the site is never blocked on the asset drop. */
+/* Self-hosted, per the brand spec — no third-party font CDN, so no external request and
+ * nothing to consent to. The .woff2 files belong in ./fonts/. Until they land the stacks
+ * below fall back cleanly, so the site is never blocked on the asset drop. */
 @font-face {
   font-family: 'Roboto Condensed';
   src: url('./fonts/roboto-condensed-700.woff2') format('woff2');
@@ -44,79 +54,74 @@ body {
   font-family: 'Roboto', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
   font-size: 17px;
   line-height: 1.65;
-  color: var(--ink);
-  background: var(--bg);
+  color: var(--text);
+  background: var(--ground);
+  /* A cool wash so the chrome has something to sit in rather than floating on flat
+   * black. Fixed, so it does not slide under the content on scroll. */
+  background-image:
+    radial-gradient(1200px 560px at 50% -14%, rgba(48,154,190,.15), transparent 70%),
+    radial-gradient(820px 460px at 92% 106%, rgba(34,65,108,.28), transparent 68%);
+  background-attachment: fixed;
 }
 
 .wrap { max-width: 46rem; margin: 0 auto; padding: 0 1.5rem; }
 
 /* ---------------------------------------------------------------- header */
 header {
-  border-bottom: 1px solid var(--grey);
-  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  background: rgba(13,21,32,.72);
+  backdrop-filter: saturate(140%) blur(8px);
+  position: sticky; top: 0; z-index: 10;
 }
 .bar {
   display: flex; align-items: center; gap: 1.5rem;
-  padding: 1.1rem 0;
-  max-width: 46rem; margin: 0 auto; padding-left: 1.5rem; padding-right: 1.5rem;
+  padding: .85rem 1.5rem;
+  max-width: 46rem; margin: 0 auto;
 }
 
-/* The wordmark. NOTE: this is typographic on purpose — logo.svg and mark.svg are being
- * finalised separately. When they arrive, replace the .wordmark span with:
- *   <img src="logo.svg" alt="Callista" height="28">
- * The WIFU logo deliberately does NOT appear here: callista.familybusiness.se is a
- * CeFEO-operated domain, and a WIFU mark in the header would read as "published by WIFU". */
-.wordmark {
-  font-family: 'Roboto Condensed', 'Arial Narrow', system-ui, sans-serif;
-  font-weight: 700;
-  font-size: 1.35rem;
-  letter-spacing: .01em;
-  color: var(--navy);
-  text-decoration: none;
-  white-space: nowrap;
-}
-.wordmark::before {
-  content: ""; display: inline-block;
-  width: .55rem; height: .55rem; border-radius: 50%;
-  background: var(--cyan); margin-right: .5rem; vertical-align: .05em;
-}
+/* The lockup. The WIFU logo deliberately does NOT appear here:
+ * callista.familybusiness.se is a CeFEO-operated domain, and a WIFU mark in the header
+ * would read as "published by WIFU", which it is not. WIFU is credited in the footer. */
+.brand { display: block; line-height: 0; flex: 0 0 auto; }
+.brand img { display: block; width: 148px; height: auto; }
 
 nav { margin-left: auto; display: flex; gap: 1.25rem; flex-wrap: wrap; }
 nav a {
-  color: var(--tert); text-decoration: none; font-size: .95rem; font-weight: 500;
+  color: var(--muted); text-decoration: none; font-size: .95rem; font-weight: 500;
   padding-bottom: 2px; border-bottom: 2px solid transparent;
 }
-nav a:hover { color: var(--navy); }
-nav a[aria-current="page"] { color: var(--navy); border-bottom-color: var(--cyan); }
+nav a:hover { color: var(--text); }
+nav a[aria-current="page"] { color: var(--text); border-bottom-color: var(--cyan); }
 
 /* ------------------------------------------------------------------ type */
 h1, h2, h3 {
   font-family: 'Roboto Condensed', 'Arial Narrow', system-ui, sans-serif;
   font-weight: 700;
-  color: var(--navy);
+  color: var(--text);
   line-height: 1.2;
   letter-spacing: -.005em;
 }
 h1 { font-size: 2.3rem; margin: 2.5rem 0 .5rem; }
 h2 { font-size: 1.45rem; margin: 2.75rem 0 .6rem; }
-h3 { font-size: 1.1rem; margin: 1.75rem 0 .4rem; font-family: 'Roboto', system-ui, sans-serif; font-weight: 500; }
+h3 { font-size: 1.1rem; margin: 1.75rem 0 .4rem;
+     font-family: 'Roboto', system-ui, sans-serif; font-weight: 500; }
 
-.lede { font-size: 1.15rem; color: var(--tert); margin: 0 0 2rem; }
+.lede { font-size: 1.15rem; color: var(--muted); margin: 0 0 2rem; }
 
 p { margin: 0 0 1.1rem; }
-a { color: var(--navy); text-decoration-color: var(--cyan); text-underline-offset: 2px; }
-a:hover { color: var(--cyan); }
+a { color: var(--lift); text-decoration-color: rgba(79,184,218,.45); text-underline-offset: 2px; }
+a:hover { color: #7FD0EA; }
 
 ul, ol { margin: 0 0 1.1rem; padding-left: 1.3rem; }
 li { margin-bottom: .45rem; }
 
-hr { border: 0; border-top: 2px solid var(--cyan); margin: 2.5rem 0; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 2.5rem 0; }
 
 code, .mono {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: .9em;
-  background: var(--panel);
-  border: 1px solid var(--grey);
+  background: var(--raised);
+  border: 1px solid var(--line);
   border-radius: 5px;
   padding: .1rem .35rem;
   word-break: break-all;
@@ -125,12 +130,12 @@ code, .mono {
 /* --------------------------------------------------------------- panels */
 .panel {
   background: var(--panel);
-  border: 1px solid var(--grey);
+  border: 1px solid var(--line);
   border-radius: 12px;
   padding: 1.25rem 1.4rem;
   margin: 0 0 1.4rem;
 }
-.panel.accent { border-left: 4px solid var(--cyan); }
+.panel.accent { border-left: 3px solid var(--cyan); }
 .panel h3 { margin-top: 0; }
 .panel :last-child { margin-bottom: 0; }
 
@@ -141,7 +146,7 @@ code, .mono {
   font-size: 1rem;
   background: var(--navy);
   color: #fff;
-  border: 0;
+  border: 1px solid #2E5688;
   border-radius: 10px;
   padding: .9rem 1.1rem;
   margin: 0 0 1.4rem;
@@ -162,7 +167,7 @@ ol.steps > li::before {
   width: 1.8rem; height: 1.8rem;
   display: grid; place-items: center;
   border-radius: 50%;
-  background: var(--cyan); color: #fff;
+  background: var(--cyan); color: #08111B;
   font-family: 'Roboto Condensed', system-ui, sans-serif;
   font-weight: 700; font-size: .95rem;
 }
@@ -172,19 +177,19 @@ ol.steps > li::before {
 .stat b {
   display: block;
   font-family: 'Roboto Condensed', 'Arial Narrow', system-ui, sans-serif;
-  font-weight: 700; font-size: 2rem; line-height: 1.1; color: var(--navy);
+  font-weight: 700; font-size: 2rem; line-height: 1.1; color: var(--text);
 }
-.stat span { color: var(--tert); font-size: .9rem; }
+.stat span { color: var(--muted); font-size: .9rem; }
 
 /* FAQ */
 details {
-  border-bottom: 1px solid var(--grey);
+  border-bottom: 1px solid var(--line);
   padding: 1rem 0;
 }
 details summary {
   cursor: pointer;
   font-weight: 500;
-  color: var(--navy);
+  color: var(--text);
   list-style: none;
   display: flex; gap: .6rem; align-items: flex-start;
 }
@@ -198,12 +203,13 @@ details > *:not(summary) { margin-top: .8rem; }
 /* --------------------------------------------------------------- footer */
 footer {
   margin-top: 4rem;
-  border-top: 1px solid var(--grey);
+  border-top: 1px solid var(--line);
   padding: 2rem 0 3rem;
-  color: var(--mid);
+  color: var(--muted);
   font-size: .9rem;
 }
-footer a { color: var(--tert); }
+footer a { color: var(--muted); }
+footer a:hover { color: var(--lift); }
 
 /* --------------------------------------------------------------- mobile */
 @media (max-width: 34rem) {
@@ -211,17 +217,7 @@ footer a { color: var(--tert); }
   h1 { font-size: 1.85rem; }
   h2 { font-size: 1.25rem; }
   .bar { flex-wrap: wrap; gap: .75rem 1rem; }
+  .brand img { width: 128px; }
   nav { margin-left: 0; width: 100%; gap: 1rem; }
   .stats { gap: 1.1rem 1.75rem; }
-}
-
-/* Respect the reader's theme where it costs nothing, but keep the palette:
- * this is a brand surface, so dark mode inverts the shell, not the accents. */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #10161F; --panel: #182231; --grey: #2A3646;
-    --ink: #E4EAF1; --navy: #8FB6D8; --tert: #9FB6CC; --mid: #7C8B9C;
-  }
-  .endpoint { background: #1B2942; }
-  ol.steps > li::before { color: #0E141C; }
 }
