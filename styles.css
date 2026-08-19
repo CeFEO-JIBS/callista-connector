@@ -1,29 +1,45 @@
 /* Callista — callista.familybusiness.se
  *
- * DARK BY DESIGN, and matched to the connector's own surfaces (src/theme.ts in
- * CeFEO-JIBS/wifu-mcp-connector). A reader crosses between the two mid-install — this
- * page, then mcp.familybusiness.se/callista to sign in — so they have to look like one
- * product.
+ * WIFU LIVERY ON A CeFEO DOMAIN. The palette is WIFU's own pair — the deep navy
+ * #22416C and the accent cyan #309ABE — laid out the way wifu.de lays them out: white
+ * ground, navy uppercase condensed headings, a short cyan rule beneath them, navy pill
+ * buttons, navy full-bleed bands top and bottom. A reader who arrives from wifu.de should
+ * recognise where the material comes from.
  *
- * The lockup is the reason. It is chrome artwork on a transparent background: on white
- * it has almost no edge contrast and reads as a grey smudge, and the mark's own field is
- * near-black.
+ * THE HEADER AND FOOTER ARE NAVY FOR A REASON, and it is not decoration. The Callista
+ * lockup is chrome artwork on a transparent background: on white it has almost no edge
+ * contrast and reads as a grey smudge, and the mark's own field is near-black. It was
+ * drawn for a dark ground. Putting the navy band behind it keeps the page light like
+ * wifu.de while giving the lockup the ground it needs. Do not move the lockup onto white.
  *
- * The contrast constraint from the brand notes inverts here, usefully. #309ABE is only
- * ~3.1:1 on white — fine for rules and fills, barred from body copy. On this ground it
- * clears 7:1, so it can carry text as well.
+ * The contrast constraint from the brand notes applies again here, since we are back on a
+ * light surface: #309ABE is ~3.2:1 on white — fine for rules, fills, chips and borders,
+ * barred from body copy. Links use #1B5E7E, the same hue darkened to 7.1:1.
+ *
+ * Measured ratios, all AA or better:
+ *   #16202E on white 16.4   body copy
+ *   #56657A on white 5.9    secondary text
+ *   #22416C on white 10.3   headings
+ *   #1B5E7E on white 7.1    links
+ *   #FFFFFF on navy 10.3    header, buttons, bands
+ *   #C6D5E8 on navy 6.9     footer copy
+ *   #8FD3EC on navy 6.2     footer links
+ *   #16202E on cyan 5.1     step numerals
  */
 
 :root {
-  --ground: #0D1520;  /* page */
-  --panel:  #16212F;  /* cards */
-  --raised: #1D2A3A;  /* code, table stripes */
-  --line:   #27384E;  /* borders */
-  --text:   #E7EDF5;  /* body copy */
-  --muted:  #93A6BC;  /* secondary */
-  --cyan:   #309ABE;  /* WIFU accent */
-  --lift:   #4FB8DA;  /* links, hover */
-  --navy:   #22416C;  /* WIFU primary, as a deep fill */
+  --ground:  #FFFFFF;  /* page */
+  --surface: #F2F5F8;  /* cards, code, table stripes */
+  --line:    #D8E0EA;  /* borders */
+  --text:    #16202E;  /* body copy */
+  --muted:   #56657A;  /* secondary */
+  --navy:    #22416C;  /* WIFU primary — headings, bands, buttons */
+  --navy-lo: #1A3357;  /* pressed / hover on navy */
+  --cyan:    #309ABE;  /* WIFU accent — rules, fills, chips */
+  --link:    #1B5E7E;  /* the accent darkened until it can carry text */
+  --link-lo: #123F55;  /* link hover */
+  --on-navy: #C6D5E8;  /* copy on a navy band */
+  --on-navy-link: #8FD3EC;
 }
 
 /* Self-hosted, per the brand spec — no third-party font CDN, so no external request and
@@ -49,28 +65,27 @@
 
 html { -webkit-text-size-adjust: 100%; }
 
+/* The navy footer is a band, so it has to reach the bottom of the window even on a short
+ * page — otherwise the band floats with white beneath it. */
 body {
   margin: 0;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
   font-family: 'Roboto', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
   font-size: 17px;
   line-height: 1.65;
   color: var(--text);
   background: var(--ground);
-  /* A cool wash so the chrome has something to sit in rather than floating on flat
-   * black. Fixed, so it does not slide under the content on scroll. */
-  background-image:
-    radial-gradient(1200px 560px at 50% -14%, rgba(48,154,190,.15), transparent 70%),
-    radial-gradient(820px 460px at 92% 106%, rgba(34,65,108,.28), transparent 68%);
-  background-attachment: fixed;
 }
+main { flex: 1 0 auto; }
+footer { flex-shrink: 0; }
 
 .wrap { max-width: 46rem; margin: 0 auto; padding: 0 1.5rem; }
 
 /* ---------------------------------------------------------------- header */
 header {
-  border-bottom: 1px solid var(--line);
-  background: rgba(13,21,32,.72);
-  backdrop-filter: saturate(140%) blur(8px);
+  background: var(--navy);
+  border-bottom: 3px solid var(--cyan);
   position: sticky; top: 0; z-index: 10;
 }
 .bar {
@@ -79,48 +94,63 @@ header {
   max-width: 46rem; margin: 0 auto;
 }
 
-/* The lockup. The WIFU logo deliberately does NOT appear here:
- * callista.familybusiness.se is a CeFEO-operated domain, and a WIFU mark in the header
- * would read as "published by WIFU", which it is not. WIFU is credited in the footer. */
+/* The lockup, on the navy band it was drawn for. The WIFU logo deliberately does NOT
+ * appear here: callista.familybusiness.se is a CeFEO-operated domain, and a WIFU mark in
+ * the header would read as "published by WIFU", which it is not. The colours are WIFU's;
+ * the imprint is CeFEO's, and the footer says so. */
 .brand { display: block; line-height: 0; flex: 0 0 auto; }
 .brand img { display: block; width: 148px; height: auto; }
 
 nav { margin-left: auto; display: flex; gap: 1.25rem; flex-wrap: wrap; }
 nav a {
-  color: var(--muted); text-decoration: none; font-size: .95rem; font-weight: 500;
+  color: var(--on-navy); text-decoration: none; font-size: .95rem; font-weight: 500;
   padding-bottom: 2px; border-bottom: 2px solid transparent;
 }
-nav a:hover { color: var(--text); }
-nav a[aria-current="page"] { color: var(--text); border-bottom-color: var(--cyan); }
+nav a:hover { color: #fff; }
+nav a[aria-current="page"] { color: #fff; border-bottom-color: var(--cyan); }
 
 /* ------------------------------------------------------------------ type */
-h1, h2, h3 {
+h1, h2 {
   font-family: 'Roboto Condensed', 'Arial Narrow', system-ui, sans-serif;
   font-weight: 700;
-  color: var(--text);
-  line-height: 1.2;
-  letter-spacing: -.005em;
+  color: var(--navy);
+  line-height: 1.15;
+  text-transform: uppercase;
+  letter-spacing: .01em;
 }
-h1 { font-size: 2.3rem; margin: 2.5rem 0 .5rem; }
-h2 { font-size: 1.45rem; margin: 2.75rem 0 .6rem; }
-h3 { font-size: 1.1rem; margin: 1.75rem 0 .4rem;
-     font-family: 'Roboto', system-ui, sans-serif; font-weight: 500; }
+/* The short cyan rule under a heading is WIFU's most recognisable typographic move.
+ * Pseudo-element rather than border-bottom so it stops at 3.5rem instead of running the
+ * measure. */
+h1::after, h2::after {
+  content: ""; display: block;
+  width: 3.5rem; height: 3px;
+  background: var(--cyan);
+  margin-top: .55rem;
+}
+h1 { font-size: 2.3rem; margin: 2.5rem 0 .9rem; }
+h2 { font-size: 1.45rem; margin: 2.75rem 0 1rem; }
+h3 {
+  font-family: 'Roboto', system-ui, sans-serif; font-weight: 500;
+  font-size: 1.1rem; color: var(--navy);
+  margin: 1.75rem 0 .4rem; line-height: 1.3;
+}
 
 .lede { font-size: 1.15rem; color: var(--muted); margin: 0 0 2rem; }
 
 p { margin: 0 0 1.1rem; }
-a { color: var(--lift); text-decoration-color: rgba(79,184,218,.45); text-underline-offset: 2px; }
-a:hover { color: #7FD0EA; }
+a { color: var(--link); text-decoration-color: rgba(27,94,126,.4); text-underline-offset: 2px; }
+a:hover { color: var(--link-lo); }
 
 ul, ol { margin: 0 0 1.1rem; padding-left: 1.3rem; }
 li { margin-bottom: .45rem; }
+li::marker { color: var(--cyan); }
 
 hr { border: 0; border-top: 1px solid var(--line); margin: 2.5rem 0; }
 
 code, .mono {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: .9em;
-  background: var(--raised);
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 5px;
   padding: .1rem .35rem;
@@ -129,7 +159,7 @@ code, .mono {
 
 /* --------------------------------------------------------------- panels */
 .panel {
-  background: var(--panel);
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 1.25rem 1.4rem;
@@ -139,6 +169,18 @@ code, .mono {
 .panel h3 { margin-top: 0; }
 .panel :last-child { margin-bottom: 0; }
 
+/* The navy band, as wifu.de uses it: one block per page pulled out of the white and set
+ * in the primary. Reserve it for the single thing the page most wants read. */
+.panel.solid {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--on-navy);
+}
+.panel.solid h3 { color: #fff; }
+.panel.solid a { color: var(--on-navy-link); text-decoration-color: rgba(143,211,236,.45); }
+.panel.solid a:hover { color: #fff; }
+.panel.solid strong { color: #fff; }
+
 /* URL to copy on the install page */
 .endpoint {
   display: block;
@@ -146,28 +188,29 @@ code, .mono {
   font-size: 1rem;
   background: var(--navy);
   color: #fff;
-  border: 1px solid #2E5688;
+  border: 1px solid var(--navy);
   border-radius: 10px;
   padding: .9rem 1.1rem;
   margin: 0 0 1.4rem;
   word-break: break-all;
 }
 
-/* Download button — the skill package on the install page. Filled with the WIFU accent
- * rather than the navy: on this ground #309ABE clears 7:1, so dark text on it is legible
- * and the button reads as the one action on the page rather than another panel. */
+/* Download button — the skill package on the install page. WIFU's button is a navy pill
+ * with small uppercase letterspaced type; this is that, at the one size the site needs. */
 .btn {
   display: inline-block;
-  background: var(--cyan);
-  color: #08111B;
-  font-weight: 500;
+  background: var(--navy);
+  color: #fff;
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 500; font-size: .9rem;
+  text-transform: uppercase; letter-spacing: .07em;
   text-decoration: none;
-  border: 1px solid #47AFD1;
-  border-radius: 10px;
-  padding: .7rem 1.15rem;
+  border: 1px solid var(--navy);
+  border-radius: 999px;
+  padding: .75rem 1.6rem;
 }
-.btn:hover { background: var(--lift); color: #08111B; }
-.btn:focus-visible { outline: 2px solid var(--lift); outline-offset: 3px; }
+.btn:hover { background: var(--navy-lo); border-color: var(--navy-lo); color: #fff; }
+.btn:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
 
 /* numbered steps */
 ol.steps { list-style: none; padding: 0; counter-reset: s; }
@@ -183,7 +226,7 @@ ol.steps > li::before {
   width: 1.8rem; height: 1.8rem;
   display: grid; place-items: center;
   border-radius: 50%;
-  background: var(--cyan); color: #08111B;
+  background: var(--cyan); color: var(--text);
   font-family: 'Roboto Condensed', system-ui, sans-serif;
   font-weight: 700; font-size: .95rem;
 }
@@ -193,7 +236,7 @@ ol.steps > li::before {
 .stat b {
   display: block;
   font-family: 'Roboto Condensed', 'Arial Narrow', system-ui, sans-serif;
-  font-weight: 700; font-size: 2rem; line-height: 1.1; color: var(--text);
+  font-weight: 700; font-size: 2rem; line-height: 1.1; color: var(--navy);
 }
 .stat span { color: var(--muted); font-size: .9rem; }
 
@@ -205,7 +248,7 @@ details {
 details summary {
   cursor: pointer;
   font-weight: 500;
-  color: var(--text);
+  color: var(--navy);
   list-style: none;
   display: flex; gap: .6rem; align-items: flex-start;
 }
@@ -219,13 +262,17 @@ details > *:not(summary) { margin-top: .8rem; }
 /* --------------------------------------------------------------- footer */
 footer {
   margin-top: 4rem;
-  border-top: 1px solid var(--line);
-  padding: 2rem 0 3rem;
-  color: var(--muted);
+  background: var(--navy);
+  border-top: 3px solid var(--cyan);
+  color: var(--on-navy);
   font-size: .9rem;
 }
-footer a { color: var(--muted); }
-footer a:hover { color: var(--lift); }
+footer .wrap { padding-top: 2rem; padding-bottom: 3rem; }
+footer p { margin: 0 0 .8rem; }
+footer :last-child { margin-bottom: 0; }
+footer strong { color: #fff; }
+footer a { color: var(--on-navy-link); text-decoration-color: rgba(143,211,236,.45); }
+footer a:hover { color: #fff; }
 
 /* --------------------------------------------------------------- mobile */
 @media (max-width: 34rem) {

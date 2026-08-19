@@ -61,30 +61,43 @@ Settings → Pages → Deploy from a branch → `main` → `/ (root)`.
 
 ## Brand assets
 
-**The site is dark**, and matched to the connector's own surfaces (`src/theme.ts` in
-`CeFEO-JIBS/wifu-mcp-connector`). A reader crosses between the two mid-install — this
-site, then `mcp.familybusiness.se/callista` to sign in — so they have to look like one
-product. Change the palette in one place and change it in the other.
+**The site wears WIFU's livery**: the WIFU navy `#22416C` and the WIFU accent cyan
+`#309ABE`, arranged the way wifu.de arranges them — white ground, navy uppercase condensed
+headings each with a short cyan rule beneath, navy pill buttons, navy full-bleed bands top
+and bottom. A reader arriving from wifu.de should recognise where the material comes from.
 
-The deeper reason is the lockup itself: it is chrome artwork on a transparent background.
-On white it has almost no edge contrast and reads as a grey smudge, and the mark's own
-field is near-black. Dark is what it was drawn for.
+**The header and footer are navy for a reason, and it is not decoration.** The Callista
+lockup is chrome artwork on a transparent background: on white it has almost no edge
+contrast and reads as a grey smudge, and the mark's own field is near-black. It was drawn
+for a dark ground. The navy bands give it that ground while the page itself stays light
+like wifu.de. **Do not move the lockup onto the white.** If a light-ground lockup is ever
+drawn, that constraint lifts and the bands become a free choice again.
 
 | token | value | use |
 |---|---|---|
-| `--ground` | `#0D1520` | page |
-| `--panel` | `#16212F` | cards |
-| `--raised` | `#1D2A3A` | code, inputs |
-| `--line` | `#27384E` | borders |
-| `--text` | `#E7EDF5` | body copy |
-| `--muted` | `#93A6BC` | secondary text |
-| `--cyan` | `#309ABE` | WIFU accent |
-| `--lift` | `#4FB8DA` | links, hover |
-| `--navy` | `#22416C` | WIFU primary, as a deep fill |
+| `--ground` | `#FFFFFF` | page |
+| `--surface` | `#F2F5F8` | cards, code |
+| `--line` | `#D8E0EA` | borders |
+| `--text` | `#16202E` | body copy |
+| `--muted` | `#56657A` | secondary text |
+| `--navy` | `#22416C` | WIFU primary — headings, bands, buttons |
+| `--navy-lo` | `#1A3357` | hover on navy |
+| `--cyan` | `#309ABE` | WIFU accent — rules, fills, chips |
+| `--link` | `#1B5E7E` | links |
+| `--on-navy` | `#C6D5E8` | copy on a navy band |
+| `--on-navy-link` | `#8FD3EC` | links on a navy band |
 
-The contrast constraint from the brand notes **inverts** on this ground, usefully:
-`#309ABE` is ~3.1:1 on white and barred from body copy there, but clears 7:1 here. It can
-carry text as well as rules. Do not carry that permission back to a light surface.
+**`#309ABE` cannot carry body copy here.** It is ~3.2:1 on white — fine for rules, fills,
+chips and borders, barred from text. That is why `--link` exists: the same hue darkened to
+7.1:1. On the earlier dark ground the same cyan cleared 7:1 and could carry text; that
+permission does not survive the move to white, and the ratio is the reason, not taste.
+Every pair in use is AA or better — body 16.4:1, secondary 5.9:1, headings 10.3:1, links
+7.1:1, white on navy 10.3:1, footer copy 6.9:1, footer links 6.2:1, step numerals 5.1:1.
+
+**The connector's own surfaces are still dark** (`src/theme.ts` in
+`CeFEO-JIBS/wifu-mcp-connector`), and a reader crosses from this site to
+`mcp.familybusiness.se/callista` to sign in. The two no longer match. Either restyle the
+connector's sign-in to this palette, or accept the seam — but know it is there.
 
 Images are derived from the master lockup by script — a resize, and a square crop taken
 at the measured alpha bounding box. Nothing is redrawn. `logo.png` (640w) with
@@ -96,9 +109,11 @@ at the measured alpha bounding box. Nothing is redrawn. `logo.png` (640w) with
 until the files land the stacks fall back to Arial Narrow / system-ui, so nothing is
 blocked on the drop.
 
-**The WIFU logo does not go in the site header.** This is a CeFEO-operated domain; a WIFU
-mark up there reads as "published by WIFU", which it is not. WIFU is credited in the
-footer and linked throughout.
+**The WIFU logo does not go in the site header, and the colours do not change that.** This
+is a CeFEO-operated domain. Wearing WIFU's palette already pushes towards "published by
+WIFU", which it is not — a WIFU mark up there would settle the impression. WIFU is credited
+in the footer of every page and linked throughout, and the footer wording is what carries
+the distinction; do not trim it.
 
 ## Corpus numbers
 
