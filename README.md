@@ -3,7 +3,8 @@
 The public site for **Callista**, the WIFU library MCP connector.
 Live at **https://callista.familybusiness.se**
 
-Install guide, FAQ and contact. Static HTML, no build step, no JavaScript.
+Install guide, FAQ, contact, and the downloadable Callista skill. Static HTML, no
+JavaScript; the only build step is `skill/build.sh`, which packages the skill.
 
 ## What is NOT here
 
@@ -14,6 +15,37 @@ Install guide, FAQ and contact. Static HTML, no build step, no JavaScript.
   basic auth. It is deliberately not here: GitHub Pages cannot do basic auth and cannot
   reach the database, so putting it here would mean cross-origin calls plus app-level
   sessions — replacing a gate that already works with one the service has no code for.
+
+## The skill
+
+`skill/callista-connector/SKILL.md` is the source; `callista-connector.zip` at the repo root
+is the built artifact the install page hands out. Rebuild after any edit:
+
+```sh
+./skill/build.sh
+```
+
+Both are committed. The zip is a build output, but GitHub Pages serves files, not build
+steps, so the artifact has to be in the tree for the download link to resolve.
+
+**The archive's root must be the skill folder** — `callista-connector/SKILL.md`, not a bare
+`SKILL.md` and not `skill/callista-connector/SKILL.md`. claude.ai's uploader rejects the
+other two shapes. That is the whole reason `build.sh` does a `cd` before zipping.
+
+Frontmatter is restricted to `name` and `description`. The upload path validates against
+the Agent Skills spec's six permitted fields and fails hard on anything else, so do not add
+convenience keys.
+
+**There is no one-click install, and the page says so.** Claude has no install-from-a-URL
+for skills: a skill is a file the user uploads to their own account under Customize →
+Skills. A download button is the closest thing that exists, and the alternative — a
+`claude-cli://` deep link — only pre-fills a prompt in a local Claude Code session, which
+is not the audience this site serves. If Anthropic ships an install URL, the button on
+`install.html#skill` is the one place to change.
+
+The skill is not a substitute for the connector and does not carry a copy of the library. It
+instructs Claude to check for the connector's tools and to stop if they are absent, so a
+user who installs only the skill gets a refusal rather than a fluent invention.
 
 ## Serving
 

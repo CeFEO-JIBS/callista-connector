@@ -29,7 +29,9 @@
 
   <h1>Install Callista</h1>
   <p class="lede">About a minute, once. You need a Claude account and an invitation to
-    Callista at the email address you will sign in with.</p>
+    Callista at the email address you will sign in with. There is a second, optional
+    minute at the end: <a href="#skill">the Callista skill</a>, which teaches Claude how
+    to read the library it has just been given.</p>
 
   <div class="panel accent">
     <h3>Before you start</h3>
@@ -88,6 +90,52 @@
     the connector is not enabled for that chat — check the connector toggle in the chat’s
     tools menu.</p>
 
+  <hr>
+
+  <h2 id="skill">Add the Callista skill</h2>
+  <p>Optional, and worth the extra minute. The connector gives Claude the library; the
+    skill tells it how to read it — to answer as a librarian of one institution rather
+    than as the field, to keep the register of a Praxisleitfaden apart from that of a
+    study, to carry the German term alongside the English, and to say so plainly instead
+    of answering from memory when the connector is not reachable.</p>
+
+  <p><a class="btn" href="callista-connector.zip" download>Download the skill (ZIP, 4 KB)</a></p>
+
+  <ol class="steps">
+    <li>
+      <strong>Download the file</strong> above and leave it zipped. Claude wants the
+      archive, not its contents.
+    </li>
+    <li>
+      <strong>Check Settings → Capabilities.</strong> <em>Code execution and file
+      creation</em> has to be on, or skills will not run. On Team and Enterprise a
+      workspace admin may need to allow Skills first.
+    </li>
+    <li>
+      <strong>Go to Customize → Skills</strong> and upload the ZIP.
+    </li>
+    <li>
+      <strong>Done.</strong> Claude reaches for the skill on its own when a question is
+      about WIFU, and you can always call it by name: <em>“Callista, …”</em>.
+    </li>
+  </ol>
+
+  <div class="panel">
+    <h3>Why there is no one-click install</h3>
+    <p>Claude has no install-from-a-URL for skills. A skill is a file you upload to your
+      own account, and no web page can put one there for you — so a download button is as
+      close as this gets. The connector above and the skill here are separate things, and
+      each is installed in its own place: the connector under <strong>Connectors</strong>,
+      the skill under <strong>Skills</strong>. The skill is worth little without the
+      connector; it will tell you so rather than improvise.</p>
+  </div>
+
+  <p style="color:var(--muted);font-size:.95rem"><strong style="color:var(--text)">In
+    Claude Code instead?</strong> Unzip it into your personal skills folder:</p>
+  <span class="endpoint">curl -fsSL https://callista.familybusiness.se/callista-connector.zip -o /tmp/callista-skill.zip &amp;&amp; unzip -oq /tmp/callista-skill.zip -d ~/.claude/skills/</span>
+
+  <hr>
+
   <h2>If something goes wrong</h2>
   <ul>
     <li><strong>“Not on the list.”</strong> The address you entered has not been granted
@@ -98,6 +146,10 @@
       start again from Claude to get a fresh one.</li>
     <li><strong>“Too many attempts.”</strong> Five wrong codes ends that sign-in attempt.
       Start again from Claude.</li>
+    <li><strong>The skill uploaded but Claude ignores it.</strong> Check that it is
+      switched on under Customize → Skills, and that <em>Code execution and file
+      creation</em> is enabled under Settings → Capabilities. A skill that is off, or an
+      account without code execution, produces no error — just ordinary answers.</li>
     <li><strong>It worked and then stopped.</strong> Access is re-checked on every request,
       so a withdrawn or expired grant takes effect immediately. If that is unexpected,
       <a href="contact.html">tell us</a>.</li>
